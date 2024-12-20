@@ -1,0 +1,18 @@
+<div class="navbar">
+    <!-- Zaloguj -->
+    <li class="nav-item" *ngIf="(auth.isAuthenticated$ | async) === false">
+      <button id="qsLoginBtn" class="btn btn-primary btn-margin" (click)="loginWithRedirect()">
+        Log in
+      </button>
+    </li>
+  
+    <!-- Powitanie i wyloguj -->
+    <div *ngIf="auth.isAuthenticated$ | async" class="user-info">
+      <span *ngIf="user$ | async as user" class="user-name">Hi, {{ user.name }}</span>
+      <button id="qsLogoutBtn" class="btn btn-danger btn-margin" (click)="logout()">
+        Log out
+      </button>
+      <button routerLink="/order-history" class="btn btn-success btn-margin">Order</button>
+    </div>
+  </div>
+  

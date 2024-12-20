@@ -1,0 +1,59 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div class="row">
+
+                <!-- wyświetlanie listy produktów -->
+                <div *ngFor="let tempProduct of products" class="col-md-3">
+                    <div class="product-box">
+                        <a routerLink="/products/{{ tempProduct.id }}">
+                            <img src="{{ tempProduct.imageUrl }}" class="img-responsive">
+                        </a>
+                        <a routerLink="/products/{{ tempProduct.id }}">
+                            <h1>{{ tempProduct.name }}</h1>
+                        </a>
+                        <div class="price">{{ tempProduct.unitPrice | currency:'PLN' }}</div>
+                        <button (click)="addToCart(tempProduct)" class="btn btn-primary btn-sm">Add to cart</button>
+                    </div>
+                </div>
+
+                <!-- jeżeli nie ma produktów pokaż to-->
+                <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
+                    No products found.
+                </div>
+
+            </div>
+
+            <!-- footer -->
+            <div class="footer-pagination">
+                <div class="row">
+                    <div class="col-md-12 d-flex align-items-center">
+                        <!-- Pasek z numerami stron -->
+                        <div class="d-flex align-items-center flex-grow-1">
+                            <ngb-pagination [(page)]="thePageNumber"
+                                            [pageSize]="thePageSize"
+                                            [collectionSize]="theTotalElements"
+                                            [maxSize]="10"
+                                            [boundaryLinks]="true"
+                                            (pageChange)="listProducts()">
+                            </ngb-pagination>
+                        </div>
+
+                        <!-- Opcja Page Size -->
+                        <div class="d-flex align-items-center ml-3">
+                            <span class="mr-2">Page Size</span>
+                            <select (change)="updatePageSize($event.target.value)">
+                                <option>5</option>
+                                <option selected="true">10</option>
+                                <option>20</option>
+                                <option>50</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- koniec footera -->
+
+        </div>
+    </div>
+</div>

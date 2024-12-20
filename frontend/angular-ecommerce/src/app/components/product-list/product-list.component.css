@@ -1,0 +1,6 @@
+.page-size-control {
+    text-align: left !important; /* Wymusza wyrównanie do lewej */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}

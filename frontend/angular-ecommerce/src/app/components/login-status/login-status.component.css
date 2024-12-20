@@ -1,0 +1,55 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Elementy wyrównane do prawej */
+    gap: 15px; /* Odstępy między elementami */
+    padding: 10px 20px;
+    background-color: #0da8e4; 
+  }
+  
+  .nav-item, .user-info {
+    list-style-type: none; /* Usuń znaczniki listy */
+    margin: 0;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .user-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .btn-margin {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    border: none;
+    color: #fff;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    border: none;
+    color: #fff;
+  }
+  
+  .btn:hover {
+    opacity: 0.9;
+    cursor: pointer;
+  }
+  

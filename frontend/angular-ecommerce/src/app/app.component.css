@@ -1,0 +1,12 @@
+.user-greeting {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .user-greeting span {
+    font-weight: bold;
+  }
+  
