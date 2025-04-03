@@ -1,24 +1,15 @@
-# Używamy obrazu z Node.js
 FROM node:14
-
-# Ustawiamy katalog roboczy
 WORKDIR /app
-
-# Kopiujemy pliki package.json i package-lock.json do katalogu roboczego
-COPY angular-ecommerce/package*.json ./
-
-# Instalujemy zależności
+# Wykorzystanie cache – kopiujemy najpierw pliki package.json
+COPY angular-ecommerce/package.json ./
 RUN npm install
 
-# Kopiujemy resztę plików aplikacji do katalogu roboczego
-COPY angular-ecommerce/ .
-
-# Budujemy aplikację
+# Kopiujemy resztę plików aplikacji
+COPY angular-ecommerce/ ./
 RUN npm run build --prod
 
-# Serwujemy aplikację używając serwera statycznego
+# Instalacja serwera do serwowania statycznych plików
 RUN npm install -g serve
-CMD ["serve", "-s", "dist/angular-ecommerce", "-l", "4200"]
 
-# Eksponujemy port na zewnątrz
 EXPOSE 4200
+CMD ["serve", "-s", "dist/angular-ecommerce", "-l", "4200"]

@@ -7,13 +7,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    entrypoint: ["java", "-jar", "/app/app.jar"]
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/shop?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC
       - SPRING_DATASOURCE_USERNAME=ecommerceapp
       - SPRING_DATASOURCE_PASSWORD=ecommerceapp
     depends_on:
-      - db  # Zapewnia, że backend uruchomi się po starcie bazy danych
+      db:
+        condition: service_healthy
 
   frontend:
     build:
@@ -32,9 +32,15 @@ services:
       MYSQL_PASSWORD: ecommerceapp
     volumes:
       - db_data:/var/lib/mysql
-      - "C:/Projekty/Shop online with AUth0/SkryptDB.sql:/docker-entrypoint-initdb.d/SkryptDB.sql"
+      # Używamy relatywnej ścieżki – plik SkryptDB.sql musi być umieszczony w katalogu projektu
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "3307:3306"  # Opcjonalne, aby mieć dostęp do bazy z lokalnego systemu
+      - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
 volumes:
   db_data:

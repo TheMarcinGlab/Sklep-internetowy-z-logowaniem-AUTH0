@@ -10,8 +10,6 @@ import { OrderHistoryService } from '../../services/order-history.service';
 export class OrderHistoryComponent {
   orderHistoryList: OrderHistory[] = [];
   storage: Storage = sessionStorage;
-  
-
 
   constructor(private orderHistoryService: OrderHistoryService){
 
